@@ -45,12 +45,38 @@
 17. umount -R /mnt
 18. shutdown -r now
 
+## Post install
+1. ln -s /etc/sv/dbus /var/service/
+2. ln -s /etc/sv/NetworkManager /var/service/
+3. ln -s /etc/sv/bluetoothd /var/service
+4. nmtui
+
 ## GDM
-1. xbps-install nvidia
-2. nvidia-drm.modeset=1 to kernel parameters in /etc/default/grub. Then run update-grub
-3. /etc/dracut.conf.d/nvidia.conf - add_drivers+=" nvidia nvidia_modeset nvidia_uvm nvidia_drm "
-4. dracut -f
-5. xbps-install xorg-minimal gnome
+1. xbps-install void-repo-nonfree
+2. xbps-install -Su
+3. xbps-install nvidia
+4. nvidia-drm.modeset=1 to kernel parameters in /etc/default/grub. Then run update-grub
+5. /etc/dracut.conf.d/nvidia.conf - add_drivers+=" nvidia nvidia_modeset nvidia_uvm nvidia_drm "
+6. dracut -f
+7. xbps-install xorg-minimal gnome xdg-desktop-portal xdg-desktop-portal-gtk xdg-user-dirs xdg-user-dirs-gtk xdg-utils gnome-browser-connector
+8. shutdown -r now
+9. touch /etc/sv/gdm/down
+10. ln -s /etc/sv/gdm /var/service/
+11. sv once gdm
+12. xbps-install noto-fonts-emoji noto-fonts-ttf noto-fonts-ttf-extra
+13. ln -s /usr/share/fontconfig/conf.avail/70-no-bitmaps.conf /etc/fonts/conf.d/
+14. xbps-reconfigure -f fontconfig
+
+## Network
+1. xbps-install gvfs-smb
 
 ## Audio
 1. xbps-install pulseaudio pulseaudio-utils pulsemixer alsa-plugins-pulseaudio
+
+## Backup
+1. xbps-install timeshift
+
+## App
+### Librewolf
+1. echo 'repository=https://github.com/index-0/librewolf-void/releases/latest/download/' > /etc/xbps.d/20-librewolf.conf
+2. xbps-install -Su librewolf
