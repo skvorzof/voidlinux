@@ -58,7 +58,7 @@
 4. nvidia-drm.modeset=1 to kernel parameters in /etc/default/grub. Then run update-grub
 5. /etc/dracut.conf.d/nvidia.conf - add_drivers+=" nvidia nvidia_modeset nvidia_uvm nvidia_drm "
 6. dracut -f
-7. xbps-install xorg-minimal gnome xdg-desktop-portal xdg-desktop-portal-gtk xdg-user-dirs xdg-user-dirs-gtk xdg-utils gnome-browser-connector
+7. xbps-install xorg-minimal gnome xdg-user-dirs xdg-user-dirs-gtk xdg-utils gnome-browser-connector
 8. shutdown -r now
 9. touch /etc/sv/gdm/down
 10. ln -s /etc/sv/gdm /var/service/
