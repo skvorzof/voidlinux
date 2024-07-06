@@ -67,6 +67,10 @@
 13. ln -s /usr/share/fontconfig/conf.avail/70-no-bitmaps.conf /etc/fonts/conf.d/
 14. xbps-reconfigure -f fontconfig
 
+## Wayland
+1. mkdir /etc/udev/rules.d/
+2. ln -s /dev/null /etc/udev/rules.d/61-gdm.rules
+
 ## Network
 1. xbps-install gvfs-smb
 
